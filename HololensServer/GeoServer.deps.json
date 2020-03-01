@@ -1,0 +1,51 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1/win-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {},
+    ".NETCoreApp,Version=v2.1/win-x64": {
+      "GeoServer/1.0.0": {
+        "dependencies": {
+          "GeoStreamer": "1.0.0",
+          "SocketStreamer": "1.0.0"
+        },
+        "runtime": {
+          "GeoServer.dll": {}
+        }
+      },
+      "GeoStreamer/1.0.0": {
+        "dependencies": {
+          "SocketStreamer": "1.0.0"
+        },
+        "runtime": {
+          "GeoStreamer.dll": {}
+        }
+      },
+      "SocketStreamer/1.0.0": {
+        "runtime": {
+          "SocketStreamer.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GeoServer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GeoStreamer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SocketStreamer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
