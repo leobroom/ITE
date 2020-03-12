@@ -203,6 +203,6 @@ public class Factory
     /// <summary>
     /// Deletes Geometry, if the GeometryCount changed
     /// </summary>
-    public void UpdateGeometry(BroadCastGeometryInfo broadcast)
+    public void UpdateIndex(BroadCastGeometryInfo broadcast)
         => GeometryStorage.Instance.DeleteIfNeccesaryGeometry(broadcast.curvesCount, broadcast.meshesCount, broadcast.textCount);
 }

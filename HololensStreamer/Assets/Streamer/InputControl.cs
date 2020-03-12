@@ -1,4 +1,5 @@
 ﻿using Microsoft.MixedReality.Toolkit.Input;
+using System;
 using UnityEngine;
 
 //##################################################################
@@ -22,6 +23,10 @@ public class InputControl : MonoBehaviour
     /// </summary>
     [SerializeField]
     private GameObject providerObj;
+
+    private static InputControl instance;
+
+    public static InputControl Instance => instance;
 
     /// <summary>
     /// There can be just one modus active, these are the different modi
@@ -60,6 +65,8 @@ public class InputControl : MonoBehaviour
     /// MRTK - GazeProvider - The floating point you see, when you have the hololens on your head
     /// </summary>
     private GazeProvider provider;
+
+    private void Awake() => instance = this;
 
     /// <summary>
     /// Set Up, when the Programm Starts
@@ -142,6 +149,12 @@ public class InputControl : MonoBehaviour
                 Orientation.Instance.Reset();
                 break;
         }
+    }
+
+    internal void UpdadeStreamingIndex(int index)
+    {
+        Debug.Log("UpdadeStreamingIndex");
+        actualIndex = index;
     }
 
     void Update()

@@ -544,7 +544,7 @@ MonoBehaviour:
   txtPrefab: {fileID: 4901655508932194248, guid: 4126cd7896e46ee4e861d074ebd52e93,
     type: 3}
   ipAddress: 192.168.0.100
-  connect: 0
+  connect: 1
 --- !u!1 &456113300
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1247203548
 MeshCollider:
   m_ObjectHideFlags: 0

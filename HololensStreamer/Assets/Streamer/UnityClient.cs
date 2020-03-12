@@ -23,6 +23,8 @@ class UnityClient : GeoClient<UnityClient>
     /// </summary>
     private readonly Queue<ISerializableData> informationsChanged = new Queue<ISerializableData>();
 
+    private readonly Queue<ISerializableData> indexChanged = new Queue<ISerializableData>();
+
     /// <summary>
     /// UpdateCurves is overwritten from its derived class: GeoClient, 
     /// everytime gemetry data is send, it is stacked in a special "list", 
@@ -74,13 +76,35 @@ class UnityClient : GeoClient<UnityClient>
         }
     }
 
+    protected override void UpdateIndex(BroadCastIndex updateIdex)
+    {
+        lock (indexChanged)
+        {
+            indexChanged.Enqueue(updateIdex);
+        }
+    }
+
     /// <summary>
     /// This Method is called from the Unity Update Routine. It is processing all the gathered networkdata.
     /// <see cref="GeometryStreamer.Update()"/>
     /// </summary>
     public void ProcessMessages()
     {
-     
+        //Update Index
+        ISerializableData updateIndex = null;
+
+        lock (indexChanged)
+            if (indexChanged.Count > 0)
+            {
+                updateIndex = indexChanged.Dequeue();
+                indexChanged.Clear();
+            }
+
+
+        if (updateIndex != null && updateIndex is BroadCastIndex)
+            InputControl.Instance.UpdadeStreamingIndex(((BroadCastIndex)updateIndex).index);
+
+
         ISerializableData updateGeometry = null;
 
         // First it looks, if we have some genereal informations about the meshes. Rhino as example sends first a 
@@ -91,9 +115,9 @@ class UnityClient : GeoClient<UnityClient>
 
         //UpdateGeometry() will create or delete geometry, if the geometry count changed.
         if (updateGeometry != null)
-            Factory.Instance.UpdateGeometry((BroadCastGeometryInfo)updateGeometry);
+            Factory.Instance.UpdateIndex((BroadCastGeometryInfo)updateGeometry);
 
-      
+
         ISerializableData broadcast = null;
 
 
