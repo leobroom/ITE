@@ -81,13 +81,18 @@ public class Orientation
 
         Vector3 forward = b - a;
         Vector3 right = c - a;
-
         Vector3 up = Vector3.Cross(forward, right);
 
         var worldCoord = GeometryStreamer.Instance.WorldCoordinates.transform;
         worldCoord.gameObject.SetActive(true);
         worldCoord.localPosition = a;
         worldCoord.localRotation = Quaternion.LookRotation(forward, up);
+
+        Vector3 localRot = worldCoord.localRotation.eulerAngles;
+
+        //Entfernt Kippwinkel
+       worldCoord.localRotation = Quaternion.Euler(0, localRot.y, 0);
+
         Vector3 movingVec = (worldCoord.forward + worldCoord.right) * 0.5f;
         worldCoord.localPosition += movingVec;
     }

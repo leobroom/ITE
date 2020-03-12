@@ -46,6 +46,8 @@ public class GeometryStreamer : MonoBehaviour
     [SerializeField]
     private string ipAddress = "127.0.0.1";
 
+    public bool connect = true;
+
     /// <summary>
     /// GeometryStreamer Singleton 
     /// </summary>
@@ -81,10 +83,11 @@ public class GeometryStreamer : MonoBehaviour
         Factory.Instance.CreateParent(worldCoordinates);
 
         client = UnityClient.Initialize
-            (ipAddress, Utils.GetTestPort(), "Hololens", ThreadingType.Task);
+            (ipAddress, Utils.GetTestPort(), "Hololens", ThreadingType.Thread);
         client.Message += OnMessage;
-        client.Connect();
-
+        if (connect)
+            client.Connect();
+    
         SendWelcomeMsgToServer();
     }
 

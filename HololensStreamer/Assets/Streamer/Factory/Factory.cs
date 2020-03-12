@@ -56,8 +56,9 @@ public class Factory
     /// </summary>
     private void CreateWorldCoordinateSystem()
     {
-        worldParent = new GameObject();
-        worldParent.transform.rotation = Quaternion.Euler(-90, 0, 0);
+        worldParent = new GameObject("worldParent");
+        worldParent.transform.localPosition = new Vector3(-0.5f,0,-0.5f);
+        worldParent.transform.rotation = Quaternion.Euler(-90, -90, 0);
         worldParent.transform.localScale = new Vector3(-1, 1, 1);
     }
 
@@ -67,8 +68,8 @@ public class Factory
     public void CreateParent(GameObject grandparent)
     {
         worldParent.transform.SetParent(grandparent.transform, false);
-        worldParent.transform.rotation = Quaternion.Euler(-90, 0, 0);
-        worldParent.transform.localScale = new Vector3(-1, 1, 1);
+        //worldParent.transform.rotation = Quaternion.Euler(-90, 0, 0);
+        //worldParent.transform.localScale = new Vector3(-1, 1, 1);
     }
 
     //################################ MESHES ################################

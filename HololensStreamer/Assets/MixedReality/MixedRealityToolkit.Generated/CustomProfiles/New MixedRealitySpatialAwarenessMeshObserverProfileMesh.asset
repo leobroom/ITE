@@ -19,7 +19,7 @@ MonoBehaviour:
   observerVolumeType: 1
   updateInterval: 1
   meshPhysicsLayer: 31
-  levelOfDetail: 0
+  levelOfDetail: 2000
   trianglesPerCubicMeter: 0
   recalculateNormals: 1
   displayOption: 0

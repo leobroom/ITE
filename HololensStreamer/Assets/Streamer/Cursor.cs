@@ -118,4 +118,52 @@ public class Cursor
         cursorObj.gameObject.transform.position = hitposition;
         cursorObj.gameObject.transform.localRotation = Quaternion.LookRotation(provider.transform.forward, provider.transform.up);
     }
+
+    public enum ActiveObject
+    {
+        None,
+        Z,
+        X,
+        Y
+    }
+
+    public Cursor.ActiveObject activeObject;
+    private GameObject activeGameObject;
+
+    public ActiveObject AskForHit(out GameObject gameObj)
+    {
+        gameObj = null;
+
+
+        Cursor.ActiveObject actual = ActiveObject.None;
+
+            Collider col = provider.HitInfo.collider;
+        if (col == null) { }
+        else  if (col.tag == "Z")
+        {
+            gameObj = provider.HitInfo.collider.gameObject;
+            actual = ActiveObject.Z;
+        }
+        else if (col.tag == "X")
+        {
+            gameObj = provider.HitInfo.collider.gameObject;
+            actual = ActiveObject.X;
+        }
+        else if (col.tag == "Y")
+        {
+            gameObj = provider.HitInfo.collider.gameObject;
+            actual = ActiveObject.Y;
+        }
+
+        if (actual != activeObject)
+        {
+            activeGameObject?.GetComponent<GeoTrigger>()?.SetTriggerActive(false);
+            gameObj?.GetComponent<GeoTrigger>()?.SetTriggerActive(true);
+
+            activeGameObject = gameObj;
+        }
+
+        activeObject = actual;
+        return activeObject;
+    }
 }

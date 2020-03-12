@@ -67,6 +67,7 @@ public class InputControl : MonoBehaviour
     void Start()
     {
         provider = providerObj.GetComponentInChildren<GazeProvider>();
+
         Cursor.Instantiate(cursor, provider);
         SetMode((int)Modus.Reset);
     }
@@ -75,8 +76,15 @@ public class InputControl : MonoBehaviour
     /// When the Select Action gets triggerd, this method is called - 
     /// see in Unity in the inputManager / Input Action scripts
     /// </summary>
-    public void OnSelect()
+    public void OnSelectStart()
     {
+        Debug.Log("OnSelectStart");
+    }
+
+    public void OnSelectEnd()
+    {
+        Debug.Log("OnSelectEnd");
+
         switch (actualModus)
         {
             default:
@@ -139,10 +147,23 @@ public class InputControl : MonoBehaviour
     void Update()
     {
         Cursor.Instance.SetPosition();
+        AskForHit();
 
         // Just for Debug - you can use the Enter Key for simulating the select finger pose
-        if (Input.GetKeyUp(KeyCode.KeypadEnter))
-            OnSelect();
+        if (Input.GetKeyDown(KeyCode.Q))
+            OnSelectStart();
+
+        //if (Input.GetKeyUp(KeyCode.KeypadEnter))
+        //    OnSelectEnd();
+
+        if (Input.GetKeyUp(KeyCode.O))
+            SetMode(Modus.Orient);
+
+        if (Input.GetKeyUp(KeyCode.N))
+            SetMode(Modus.Next);
+
+        if (Input.GetKeyUp(KeyCode.P))
+            SetMode(Modus.Previous);
     }
 
     /// <summary>
@@ -162,4 +183,14 @@ public class InputControl : MonoBehaviour
         actualIndex--;
         UnityClient.Instance.SendIndex(actualIndex);
     }
+
+    public void AskForHit()
+    {
+        GameObject go;
+
+        Cursor.ActiveObject actualObj = Cursor.Instance.AskForHit(out go);
+    }
+
+    public Cursor.ActiveObject activeObject;
+    private GameObject activeGameObject;
 }
