@@ -100,7 +100,6 @@ class UnityClient : GeoClient<UnityClient>
                 indexChanged.Clear();
             }
 
-
         if (updateIndex != null && updateIndex is BroadCastIndex)
             InputControl.Instance.UpdadeStreamingIndex(((BroadCastIndex)updateIndex).index);
 
