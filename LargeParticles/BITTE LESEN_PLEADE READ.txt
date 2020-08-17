@@ -1,0 +1,16 @@
+Dear fiber weavers, 
+
+PLease copy the robots folder  here:
+
+Documents\Robots
+
+
+And The dll and gha files there:
+
+Open Rhino
+Open Grasshopper
+
+File ->Special Folder -> Components
+
+thx,
+Leo
